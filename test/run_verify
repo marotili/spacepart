@@ -1,0 +1,7 @@
+#!/usr/bin/env runhaskell
+import System.Console.GetOpt
+import System.Cmd
+import System.Environment
+import Control.Monad
+
+main = system "ghc -ignore-package data-spacepart -i../src -o VerifyDriver --make Verify.hs && ./VerifyDriver"

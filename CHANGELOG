@@ -1,0 +1,26 @@
+    - HasBoundary no longer has boundary_points in the interface. This has a fixed definition for
+      all instances of HasBoundary.
+    - Added Data.SpacePart.Edge module
+
+0.1.0.0
+    - Renamed Math.Geometry to Data.SpacePart.AABB
+    - Renamed Data.QuadTree to Data.SpacePart.QuadTree
+    - Added Data.SpacePart.QuadTree.query. Returns all elements that intersect a given boundary.
+    - The inclusive nature of the boundary's min extent should take precedence of the exclusive
+      nature of the max extent.
+        Before this change many of the tests failed when boundaries of 0 area were involved. One case
+        that did not work was constructing a quadtree containing elements of 0 area. This change
+        corrected this.
+        The tests all_elements_inserted_query_prop and element_bounds_query_is_element_prop stil
+        fail if the element is of 0 area. 
+    - Cannot create quadtrees with initial bounds of 0 area.
+    - Removed requirement on elements being an instance of the Intersectable class. The only
+      required instance is of Data.SpacePart.AABB.HasBoundary.
+    - Changed package name to spacepart instead of data-spacepart. The last release of
+      data-spacepart used a data based version number. This version number policy did not work well
+      with the standard package version policy. 
+    - Added some QuickCheck based checks. Run with test/run_verify
+    - Cleaned up the module exports.
+
+20090126.0
+    - Initial release.

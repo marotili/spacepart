@@ -1,0 +1,52 @@
+This library is still in the early stages. Expect the interface to change.
+
+TODO:
+    - rename Boundary data type 
+    - rename HasBoundary type class.
+    - query should accept any suitable region. 
+        - At least any axis aligned boxes not just square ones
+    - partition query into two forms:
+        - inclusive: Any element with bounds entirely within or partially the query bounds.
+        - exclusive: Any element with bounds entirely within the query bounds.
+    - Improve verification tests 
+        - Test for proper distribution of inserted elements to nodes.
+    - Improve visualization tool
+        - interactive querying
+        - interactive insert
+        - remove FBO dependency.
+
+    Optimization:
+        - The following element_bounds_query_is_element_prop instance takes a significant amount of
+          time:
+        Boundary {boundary_corner = (-8.6,-25.0), boundary_size = 0.1875}
+        Boundary {boundary_corner = (-23.541666666666668,11.666666666666666), boundary_size = 20.7}
+
+verification:
+    The script "run_verify" compiles and executes the Verify.hs program. This is done in such a way
+    that any data-spacepart package installed is hidden and the modules are sourced directly from
+    the src folder. 
+    The Verify.hs program just runs whatever QuickCheck tests I have thrown together. For each
+    module under src there is a corresponding module under Verify that contains it's Arbitrary
+    instances and verification properties.
+
+    The script "run_visualize" compiles and executes the QuadTreeVisualize program. This will be
+    compiled against the installed data-spacepart package. 
+    The purpose of QuadTreeVisualize is to, well, visualize a random quadtree instance. in order to
+    run this program it's necessary to have OpenGL bindings that support FBO. I have a branch with
+    the required patches here:
+        http://www.tothepowerofdisco.com/repo/OpenGL/
+
+    The controls are:
+        - arrow keys move left, up, right, down.
+        - Shift-up and shift-down zoom in and zoom out respectively.
+
+    This visualization program should not require the FBO dependency. However it was pulled from a
+    different visualization system which did require FBOs. Removing this dependency is on the TODO
+    list.
+
+The version number of the library tries to follow the standard package version policy:
+    http://www.haskell.org/haskellwiki/Package_versioning_policy
+
+with the following addition: For the versiom number A.B.C.D D will be even for production releases
+and odd for development versions.
+
