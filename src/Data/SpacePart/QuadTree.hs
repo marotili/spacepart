@@ -7,6 +7,7 @@
 module Data.SpacePart.QuadTree where
 import Data.SpacePart.AABB
 
+import Debug.Trace
 import Data.Maybe
 import Data.List ( sortBy )
 import qualified Data.List as List
@@ -187,8 +188,8 @@ insert e q =
 insert_self_or_child :: (HasBoundary e) => e -> QuadTree e -> QuadTree e
 insert_self_or_child e q@(QuadTree es bounds quadrants) =
     case filter (\(cqb, _) -> cqb `encloses` (boundary_square e)) (quadrant_bounds q) of
-        [child]      -> insert_child child e q 
-        _            -> QuadTree (e : es) bounds quadrants
+        [child]      -> traceShow ("insert_child") $ insert_child child e q 
+        _            -> traceShow ("insert_self") $ QuadTree (e : es) bounds quadrants
 
 quadrant_bounds :: QuadTree e -> [(Boundary, Quadrant)]
 quadrant_bounds (QuadTree _ (Boundary p size) _) = 
